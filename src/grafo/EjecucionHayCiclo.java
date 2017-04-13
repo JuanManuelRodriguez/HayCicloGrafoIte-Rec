@@ -18,28 +18,40 @@ public class EjecucionHayCiclo {
 	}
 	
 	
+	
+	
 	public static void main(String[] args) {
 		EjecucionHayCiclo ejec=new EjecucionHayCiclo();
-		GrafoDirigido g=ejec.generarGrafo(20000);//cantidad de vertices ---6
-		g.insertarArista(19000, 0);//ciclo
+		GrafoDirigido g=ejec.generarGrafo(10000);//cantidad de vertices ---6
+		g.insertarArista(8500, 0);//ciclo
+		long time_start, time_end;
 		
 		//compruebo si hay ciclo en el grafo con el dfs recursivo
 		DfsCicloRec dfs=new DfsCicloRec(g);
+		time_start = System.currentTimeMillis();
 		if (dfs.hayCiclo()){
 			System.out.println("Hay ciclo en el grafo");
 		}
 		else{
 			System.out.println("No hay ciclos en el grafo");
 		}
+		time_end = System.currentTimeMillis();
+		System.out.println("the task  has taken "+ ( time_end - time_start ) +" milliseconds");
 		
 		//compruebo si hay ciclo en el grafo con el dfs recursivo
 		DfsCicloIte dfsIt=new DfsCicloIte(g);
+		time_start = System.currentTimeMillis();
 		if (dfsIt.hayCiclo()){
 			System.out.println("Hay ciclo en el grafo");
 		}
 		else{
 			System.out.println("No hay ciclos en el grafo");
 		}
+		time_end = System.currentTimeMillis();
+		System.out.println("the task  has taken "+ ( time_end - time_start ) +" milliseconds");
 	}
+	
+	//conclusion: el dfs recursivo es mucho más rápido que el iterativo en aprox. 3 veces, pero cuando hay demasiados vertices y el bucle se forma en uno muy lejano (aprox. 9000)
+	//la pila de ejecucion del dfs recursivo se rebalsa. Mientras el dfs iterativo tarda mas, pero no sufre ese rebalse de pila.
 
 }
